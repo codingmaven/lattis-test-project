@@ -1,9 +1,13 @@
 const Lock = require('../models/User');
-const _ = require('lodash');
 
 const LockController = () => {
   const create = async (req, res) => {
     try {
+      const existing = await Lock.findOne({ name: req.body.name });
+      if (!existing) {
+        return res.status(400).json({ msg: 'lock already exists' });
+      }
+
       req.body.user = req.user.id;
       const lock = await Lock.create(req.body);
 
@@ -18,8 +22,8 @@ const LockController = () => {
     try {
       const { id } = req.params;
       const lock = await Lock.findById(id);
-      _.assign(lock, req.body);
 
+      lock.name = req.body.name;
       await lock.save();
       return res.status(200).json({ lock });
     } catch (err) {
@@ -64,12 +68,25 @@ const LockController = () => {
     }
   };
 
+  const getByMacId = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const user = await Lock.findOne({ macId: id });
+
+      return res.status(200).json({ user });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ msg: 'Internal server error' });
+    }
+  };
+
   return {
     getAll,
     destroy,
     getById,
     create,
     update,
+    getByMacId,
   };
 };
 

@@ -113,6 +113,18 @@ const UserController = () => {
     }
   };
 
+  const getByUserName = async (req, res) => {
+    try {
+      const { username } = req.params;
+      const user = await User.findOne({ username });
+
+      return res.status(200).json({ user });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ msg: 'Internal server error' });
+    }
+  };
+
   return {
     register,
     login,
@@ -122,6 +134,7 @@ const UserController = () => {
     getMe,
     getById,
     update,
+    getByUserName,
   };
 };
 
