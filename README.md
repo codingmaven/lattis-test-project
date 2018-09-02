@@ -13,3 +13,4 @@ Notes:
 - Integration Tests are implemented for all user routes using Jest
 - You can check the coverage report in coverage folder after running tests.
 - Eslint is setup and we run eslint before run the test code to make sure all codes are eslint free.
+- Right now, detailed request/response validations are missing for controllers
