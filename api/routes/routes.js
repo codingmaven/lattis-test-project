@@ -20,6 +20,7 @@ router.get('/users/:id', userCtrl.getById);
 // lock routes
 
 router.get('/locks', lockCtrl.getAll);
+router.post('/locks', lockCtrl.create);
 router.get('/locks/macid/:id', lockCtrl.getByMacId);
 router.get('/locks/:id', lockCtrl.getById);
 router.delete('/locks/:id', lockCtrl.destroy);
