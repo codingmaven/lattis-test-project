@@ -66,8 +66,22 @@ const UserController = () => {
     res.status(200).json({ user: req.user, token: req.token, success: true });
   };
 
-  const update = async (req, res) => {
+  const updatePatch = async (req, res) => {
     try {
+      _.assign(req.user, req.body);
+
+      await req.user.save();
+      return res.status(200).json({ user: req.user });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ msg: 'Internal server error' });
+    }
+  };
+
+  const updatePut = async (req, res) => {
+    try {
+      delete req.user.name;
+      delete req.user.birthDate;
       _.assign(req.user, req.body);
 
       await req.user.save();
@@ -133,7 +147,8 @@ const UserController = () => {
     destroy,
     getMe,
     getById,
-    update,
+    updatePatch,
+    updatePut,
     getByUserName,
   };
 };
