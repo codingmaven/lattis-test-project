@@ -11,6 +11,8 @@ router.use(auth);
 
 router.get('/users', userCtrl.getAll);
 router.get('/users/me', userCtrl.getMe);
+router.put('/users/me', userCtrl.update);
+router.patch('/users/me', userCtrl.update);
 router.delete('/users/me', userCtrl.destroy);
 router.get('/users/:id', userCtrl.getById);
 

@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const User = require('../models/User');
 const authService = require('../services/auth.service');
 const bcryptService = require('../services/bcrypt.service');
@@ -65,6 +66,18 @@ const UserController = () => {
     res.status(200).json({ user: req.user, token: req.token, success: true });
   };
 
+  const update = async (req, res) => {
+    try {
+      _.assign(req.user, req.body);
+
+      await req.user.save();
+      return res.status(200).json({ user: req.user });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ msg: 'Internal server error' });
+    }
+  };
+
   const validate = (req, res) => {
     const { token } = req.body;
 
@@ -108,6 +121,7 @@ const UserController = () => {
     destroy,
     getMe,
     getById,
+    update,
   };
 };
 
