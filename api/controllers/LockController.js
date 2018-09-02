@@ -1,4 +1,4 @@
-const Lock = require('../models/User');
+const Lock = require('../models/Lock');
 
 const LockController = () => {
   const create = async (req, res) => {
