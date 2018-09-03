@@ -15,3 +15,6 @@ Notes:
 - Eslint is setup and we run eslint before run the test code to make sure all codes are eslint free.
 - Right now, detailed request/response validations are missing for controllers
 - Code for locks routes are not properly tested. Please check only coding style.
+
+Updated 9/2/2018
+- Test cases for locks route added, fixed some issues with lock controller.

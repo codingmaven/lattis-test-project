@@ -4,7 +4,7 @@ const LockController = () => {
   const create = async (req, res) => {
     try {
       const existing = await Lock.findOne({ name: req.body.name });
-      if (!existing) {
+      if (existing) {
         return res.status(400).json({ msg: 'lock already exists' });
       }
 
@@ -59,9 +59,9 @@ const LockController = () => {
   const getById = async (req, res) => {
     try {
       const { id } = req.params;
-      const user = await Lock.findById(id);
+      const lock = await Lock.findById(id);
 
-      return res.status(200).json({ user });
+      return res.status(200).json({ lock });
     } catch (err) {
       console.log(err);
       return res.status(500).json({ msg: 'Internal server error' });
@@ -71,9 +71,9 @@ const LockController = () => {
   const getByMacId = async (req, res) => {
     try {
       const { id } = req.params;
-      const user = await Lock.findOne({ macId: id });
+      const lock = await Lock.findOne({ macId: id });
 
-      return res.status(200).json({ user });
+      return res.status(200).json({ lock });
     } catch (err) {
       console.log(err);
       return res.status(500).json({ msg: 'Internal server error' });
