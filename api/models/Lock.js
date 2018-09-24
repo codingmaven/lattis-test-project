@@ -24,7 +24,7 @@ const Lock = sequelize.define('Lock', {
   },
 }, { tableName });
 
-Lock.belongsTo(User, { foreignKey: 'fk_user', targetKey: 'userId' });
+Lock.belongsTo(User, { foreignKey: 'fk_user', targetKey: 'id' });
 
 // eslint-disable-next-line
 Lock.prototype.toJSON = function () {
